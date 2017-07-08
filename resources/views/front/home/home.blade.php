@@ -251,7 +251,54 @@
 
 
 
-<div style="height:200px;"></div>
+    <section class="idees">
 
-</body>
+        <div class="container">
+            <h1>#Idées Fortes</h1>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="idea">
+                        <div class="hook">
+                            L’entrepreneuriat comme pilier du développement; plus de pme c’est:
+                        </div>
+                        <ul class="list-unstyled">
+                            <li>Plus d’emplois par les jeunes et pour les jeunes</li>
+                            <li>Un pouvoir d'achat des ménages plus élevé</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="idea in">
+                        <div class="hook">
+                            La promotion des entrepreneurs citoyens: Pour une croissance
+                        </div>
+                        <ul class="list-unstyled">
+                            <li>Plus juste, plus equitable</li>
+                            <li>Durable et verte</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="idea">
+                        <div class="hook">
+                            L'émergence d'un leadership pragmatique: pour un dévelopement
+                        </div>
+                        <ul class="list-unstyled">
+                            <li>Boosté par une innovation constante et pragmatique</li>
+                            <li>Animé par la volonté de favoriser le "mieux vivre ensemble"</li>
+                        </ul>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    @include('front.includes.footer')
+
+
 </html>

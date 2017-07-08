@@ -201,30 +201,37 @@
 
 
     .strat {
-        padding: 20px;
-        min-height: 320px;
+        min-height: 300px;
         border-radius: 2px;
         color: white;
+        margin-bottom: 20px;
 
         h4 {
             font-weight: 400;
             font-size: 23px;
             color: #E9F2F6;
             margin: 0;
+            padding: 20px;
         }
 
         .chapo {
             margin-top:10px;
             font-size: 16px;
             font-weight: 400;
+            padding: 0 15px;
         }
 
         .details {
             margin-top:15px;
             font-size: 16px;
             font-family: Calibri, sans-serif;
-            font-weight: 300;
-            color: #efefef;
+            font-weight: 400;
+            color: #357;
+            background-color: #f1f1f1;
+            display: block;
+            padding: 20px;
+            margin-top:30px;
+            min-height: 180px;
         }
 
         &.strat-1 {
@@ -241,4 +248,52 @@
         }
     }
 
+}
+
+
+
+
+.idees {
+    padding: 60px 0;
+    font-size: 16px;
+    background-color: #24BB87;
+    padding-bottom: 100px;
+    @include skewY(3deg);
+
+    .container {
+        @include skewY(-3deg);
+    }
+
+
+    h1 {
+        padding: 20px 0;
+    }
+
+    .idea {
+        color: #357;
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        width: 70%;
+        -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+
+        @media (max-width: $screen-sm-max) {
+            width: 90%;
+        }
+
+        &.in {
+            margin-left: 100px;
+
+            @media (max-width: $screen-sm-max) {
+                margin-left: 40px;
+            }
+        }
+
+        .hook {
+            font-size: 19px;
+            color: $color-dark;
+            margin-bottom: 10px;
+        }
+    }
 }
