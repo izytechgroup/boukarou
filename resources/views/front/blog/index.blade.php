@@ -3,6 +3,7 @@
 
 @section('head')
     <title>Blog | Le Boukarou</title>
+    <meta name="description" content="Le blog du Boukarou" />
 @endsection
 
 
@@ -23,7 +24,7 @@
                             </div>
 
                             <div class="post-title">
-                                <a href="">
+                                <a href="/blog/les-entrepreneurs-datacity-1-mobilite-flux-et-planification-urbaine">
                                     Les Entrepreneurs Datacity: #1 Mobilité,
                                     Flux et Planification Urbaine
                                 </a>
@@ -32,7 +33,6 @@
                             <div class="details">
                                 <ul class="list-unstyled">
                                     <li>24 Juillet 2017</li>
-                                    <li></li>
                                 </ul>
                             </div>
                         </div>

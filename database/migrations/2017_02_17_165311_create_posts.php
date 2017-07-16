@@ -18,7 +18,7 @@ class CreatePosts extends Migration
             $table->integer('category_id')->default(1); //Post belongs to 'uncategorized' by default
             $table->string('title');
             $table->string('slug');
-            $table->string('tags');
+            $table->string('tags')->nullable();
             $table->string('image');
             $table->string('template')->default('default');
             $table->text('excerpt');

@@ -18,4 +18,17 @@ class BlogController extends Controller
 
         return view('front.blog.index', compact('posts'));
     }
+
+
+    public function show($slug)
+    {
+        $post = Post::where('slug', $slug)
+        ->whereStatus('published')
+        ->first();
+
+        if (!$post) {
+            // show 404
+        }
+        return view('front.blog.show', compact('post'));
+    }
 }
