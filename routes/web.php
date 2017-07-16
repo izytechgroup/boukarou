@@ -15,3 +15,6 @@ Route::get('/', function () {
     return view('front.home.home');
 });
 Route::get('logout', 'views\front\AuthController@logout')->name('logout');
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('/', 'views\front\BlogController@index')->name('blog');
+});

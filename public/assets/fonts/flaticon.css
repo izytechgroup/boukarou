@@ -1,3 +1,34 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 18/02/2017 08:06
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
 .flaticon-bag:before { content: "\f100"; }
 .flaticon-bin:before { content: "\f101"; }
 .flaticon-broken-link:before { content: "\f102"; }
@@ -94,100 +125,3 @@
 .flaticon-wallet:before { content: "\f15d"; }
 .flaticon-whatsapp:before { content: "\f15e"; }
 .flaticon-youtube:before { content: "\f15f"; }
-
-    $font-Flaticon-bag: "\f100";
-    $font-Flaticon-bin: "\f101";
-    $font-Flaticon-broken-link: "\f102";
-    $font-Flaticon-building: "\f103";
-    $font-Flaticon-bullhorn: "\f104";
-    $font-Flaticon-cart: "\f105";
-    $font-Flaticon-chat: "\f106";
-    $font-Flaticon-check: "\f107";
-    $font-Flaticon-check-circle: "\f108";
-    $font-Flaticon-check-square: "\f109";
-    $font-Flaticon-clip: "\f10a";
-    $font-Flaticon-coins: "\f10b";
-    $font-Flaticon-connection: "\f10c";
-    $font-Flaticon-cross: "\f10d";
-    $font-Flaticon-database: "\f10e";
-    $font-Flaticon-desktop: "\f10f";
-    $font-Flaticon-down: "\f110";
-    $font-Flaticon-download: "\f111";
-    $font-Flaticon-facebook: "\f112";
-    $font-Flaticon-files: "\f113";
-    $font-Flaticon-folder: "\f114";
-    $font-Flaticon-funds: "\f115";
-    $font-Flaticon-graphic: "\f116";
-    $font-Flaticon-heart: "\f117";
-    $font-Flaticon-home: "\f118";
-    $font-Flaticon-info: "\f119";
-    $font-Flaticon-layers: "\f11a";
-    $font-Flaticon-left: "\f11b";
-    $font-Flaticon-linkedin: "\f11c";
-    $font-Flaticon-location: "\f11d";
-    $font-Flaticon-lock: "\f11e";
-    $font-Flaticon-login: "\f11f";
-    $font-Flaticon-logo: "\f120";
-    $font-Flaticon-logout: "\f121";
-    $font-Flaticon-mail: "\f122";
-    $font-Flaticon-mail-dark: "\f123";
-    $font-Flaticon-menu: "\f124";
-    $font-Flaticon-menu-mobile: "\f125";
-    $font-Flaticon-message: "\f126";
-    $font-Flaticon-mobile: "\f127";
-    $font-Flaticon-more-h: "\f128";
-    $font-Flaticon-more-v: "\f129";
-    $font-Flaticon-multiply: "\f12a";
-    $font-Flaticon-notification: "\f12b";
-    $font-Flaticon-page: "\f12c";
-    $font-Flaticon-pencil: "\f12d";
-    $font-Flaticon-phone: "\f12e";
-    $font-Flaticon-phone-ringing: "\f12f";
-    $font-Flaticon-photo: "\f130";
-    $font-Flaticon-pie-chart: "\f131";
-    $font-Flaticon-pinterest: "\f132";
-    $font-Flaticon-posts: "\f133";
-    $font-Flaticon-power: "\f134";
-    $font-Flaticon-printer: "\f135";
-    $font-Flaticon-question: "\f136";
-    $font-Flaticon-random: "\f137";
-    $font-Flaticon-redo: "\f138";
-    $font-Flaticon-refresh: "\f139";
-    $font-Flaticon-right: "\f13a";
-    $font-Flaticon-save: "\f13b";
-    $font-Flaticon-search: "\f13c";
-    $font-Flaticon-send: "\f13d";
-    $font-Flaticon-settings: "\f13e";
-    $font-Flaticon-share: "\f13f";
-    $font-Flaticon-shopping-cart: "\f140";
-    $font-Flaticon-signin: "\f141";
-    $font-Flaticon-skyline: "\f142";
-    $font-Flaticon-slides-h: "\f143";
-    $font-Flaticon-slides-v: "\f144";
-    $font-Flaticon-snapchat: "\f145";
-    $font-Flaticon-songs: "\f146";
-    $font-Flaticon-sort: "\f147";
-    $font-Flaticon-sort-arrows: "\f148";
-    $font-Flaticon-store: "\f149";
-    $font-Flaticon-suitcase: "\f14a";
-    $font-Flaticon-swap: "\f14b";
-    $font-Flaticon-telephone: "\f14c";
-    $font-Flaticon-time: "\f14d";
-    $font-Flaticon-tools: "\f14e";
-    $font-Flaticon-trash: "\f14f";
-    $font-Flaticon-twitter: "\f150";
-    $font-Flaticon-typing: "\f151";
-    $font-Flaticon-undo: "\f152";
-    $font-Flaticon-unlock: "\f153";
-    $font-Flaticon-up: "\f154";
-    $font-Flaticon-upload: "\f155";
-    $font-Flaticon-user: "\f156";
-    $font-Flaticon-user-circle: "\f157";
-    $font-Flaticon-user-material: "\f158";
-    $font-Flaticon-users: "\f159";
-    $font-Flaticon-users-genders: "\f15a";
-    $font-Flaticon-video: "\f15b";
-    $font-Flaticon-view: "\f15c";
-    $font-Flaticon-wallet: "\f15d";
-    $font-Flaticon-whatsapp: "\f15e";
-    $font-Flaticon-youtube: "\f15f";
