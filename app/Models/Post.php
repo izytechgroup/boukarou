@@ -20,4 +20,8 @@ class Post extends Model
     public function user() {
         return $this->belongsTo(User::class, 'last_updated_by');
     }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

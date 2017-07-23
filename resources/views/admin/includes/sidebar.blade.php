@@ -28,16 +28,9 @@
         </li>
 
         <li class="{{ Request::is('admin/comments*') ? 'active' : '' }}">
-            <a href="/admin/comments">
+            <a href="/admin/categories">
                 <i class="flaticon-chat"></i>
-                Comments
-            </a>
-        </li>
-
-        <li class="{{ Request::is('admin/menus*') ? 'active' : '' }}">
-            <a href="/admin/menus">
-                <i class="flaticon-menu"></i>
-                Menus
+                Categories
             </a>
         </li>
 

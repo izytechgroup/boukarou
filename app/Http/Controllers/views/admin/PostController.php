@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\views\admin;
 
+use DB;
 use Auth;
 use App\Models\Post;
+use App\Models\Category;
 use App\Traits\SlugTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,16 +36,18 @@ class PostController extends Controller
 
             $keywords = $request->keywords;
 
+
             $posts = Post::when($keywords, function($query) use ($keywords) {
-                return $query->where('title', 'rlike', $keywords);
+                return $query->where('title', 'like', $keywords);
             })
             ->when($status, function($query) use ($status) {
                 return $query->where('status', $status);
             })
+            ->with('category')
             ->orderBy('id', 'desc')
             ->paginate(50);
 
-            return view('admin.posts.index', ['posts' => $posts]);
+            return view('admin.posts.index', ['posts' => $posts,]);
         }
         catch (Exception $e) {
             return redirect()->back()->withErrors($e);
@@ -60,9 +64,11 @@ class PostController extends Controller
     public function create()
     {
         if ( Auth::user()->cant('create', Post::class))
-        return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
+            return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
 
-        return view('admin.posts.create');
+        $categories = Category::get();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
 
@@ -76,11 +82,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         if ( Auth::user()->cant('create', Post::class))
-        return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
+            return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'slug'  => 'required'
+            'title'         => 'required',
+            'slug'          => 'required',
+            'category_id'   => 'required'
         ]);
 
         if($validator->fails())
@@ -92,13 +99,14 @@ class PostController extends Controller
         $post = Post::create([
             'title'             => $request->title,
             'slug'              => $slug,
-            'tags'              => $request->tags,
-            'image'             => $request->image,
-            'template'          => $request->template,
-            'excerpt'           => $request->excerpt,
-            'content'           => $request->content,
+            'tags'              => $request->has('tags') ? $request->tags : null,
+            'image'             => $request->has('image') ? $request->image : "",
+            'template'          => $request->has('template') ? $request->template : 'default',
+            'excerpt'           => $request->has('excerpt') ? $request->excerpt : substr($request->content, 0, 50),
+            'content'           => $request->has('content') ? $request->content : "",
             'status'            => $request->status,
             'category_id'       => $request->category_id,
+            'published_at'      => \Carbon\Carbon::now(),
             'last_updated_by'   => Auth::user()->id
         ]);
 
@@ -118,11 +126,15 @@ class PostController extends Controller
     public function edit($id)
     {
         if ( Auth::user()->cant('create', Post::class))
-        return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
+            return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
 
         $post = Post::find($id);
-        if ( !$post ) return redirect()->route('post.index');
-        return view('admin.post.edit', ['post' => $post]);
+        if ( !$post )
+            return redirect()->route('post.index');
+
+        $categories = Category::get();
+
+        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
 
@@ -149,7 +161,8 @@ class PostController extends Controller
 
 
             $post = Post::find($id);
-            if ( !$post ) return redirect()->back();
+            if ( !$post )
+                return redirect()->back()->withErrors(['error' => 'This post does not exist']);
 
             $post->tags             = $request->tags;
             $post->title            = $request->title;

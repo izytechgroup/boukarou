@@ -11,24 +11,43 @@ class BlogController extends Controller
 
     public function index ()
     {
-        $posts = Post::orderBy('id', 'desc')
-        ->whereStatus('published')
-        ->take(24)
-        ->get();
+        $first = Post::orderBy('id', 'desc')
+        ->where('status', 'published')
+        ->first();
 
-        return view('front.blog.index', compact('posts'));
+        $posts = Post::orderBy('id', 'desc')
+            ->with('category')
+            ->whereStatus('published')
+            ->where('id', '!=', $first->id)
+            ->take(10)
+            ->get();
+
+        return view('front.blog.index', compact('posts', 'first'));
     }
 
 
     public function show($slug)
     {
         $post = Post::where('slug', $slug)
-        ->whereStatus('published')
-        ->first();
+            ->whereStatus('published')
+            ->first();
+
+        $posts = Post::whereStatus('published')
+            ->where('category_id', $post->category_id)
+            ->where('slug', '!=', $post->slug)
+            ->with('category')
+            ->select(
+                'title',
+                'slug',
+                'image'
+            )
+            ->orderBy('id', 'desc')
+            ->take(6)
+            ->get();
 
         if (!$post) {
-            // show 404
+            return redirect()->back()->withErrors(['message' => 'Not existing post !']);
         }
-        return view('front.blog.show', compact('post'));
+        return view('front.blog.show', compact('post', 'posts'));
     }
 }

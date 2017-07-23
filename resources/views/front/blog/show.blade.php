@@ -39,79 +39,71 @@
                     <div class="post">
                         <div class="category">
                             <a href="/blog/categories/entrepreunariat">
-                                <i class="flaticon-menu-mobile"></i> Entrepreunariat
+                                <i class="flaticon-menu-mobile"></i> {{ $post->category->name }}
                             </a>
                         </div>
 
                         <div class="post-title">
-                            Les Entrepreneurs Datacity: #1 Mobilité, Flux et Planification Urbaine
+                            {{ $post->title }}
                         </div>
 
                         <div class="post-metas">
                             <ul class="list-unstyled">
-                                <li>24 Juillet 2017</li>
+                                <li>{{ Helper::fullDate($post->created_at) }}</li>
                             </ul>
                         </div>
 
                         <div class="image">
-                            <img class="img-responsive" src="http://www.alios-finance.com//images/images_article/62_max.jpg" alt="">
+                            <img class="img-responsive" src="{{ $post->image }}" alt="">
                         </div>
                         <div class="sharethis-inline-share-buttons"></div>
 
                         <div class="content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
+                            {!! $post->content !!}
                         </div>
+
                     </div>
                 </div>
                 {{-- End of col --}}
 
 
-
                 <div class="col-md-3 col-sm-12">
                     <div class="row">
-                        <div class="col-md-12 col-sm-6">
-                            <div class="other-post">
-                                <div class="image">
-                                    <a href="">
-                                        <img src="http://www.traveladventures.org/countries/cameroon/images/bandjoun-chefferie13.jpg" class="img-responsive">
-                                    </a>
+                        @foreach ($posts as $p)
+                            <div class="col-md-12 col-sm-6">
+                                <div class="other-post">
+                                    <div class="image">
+                                        <a href="">
+                                            <img src="{{ $p->image }}" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <h4>
+                                        <a href="/blog/{{ $p->slug }}">{{ $p->title }}</a>
+                                    </h4>
                                 </div>
-                                <h4>
-                                    <a href="">De Baf en mbeng... le parcours d'un indien</a>
-                                </h4>
                             </div>
-                        </div>
-
-                        <div class="col-md-12 col-sm-6">
-                            <div class="other-post">
-                                <div class="image">
-                                    <a href="">
-                                        <img src="http://files.acn-aed-ca.org/Cameroon-3-ACN-20150408-22666-1024x683.jpg" class="img-responsive">
-                                    </a>
-                                </div>
-                                <h4>
-                                    <a href="">Quand un DG verse partout... ça donne ça</a>
-                                </h4>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-sm-12">
+                    <div class="fb-comments mt-30" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="10"></div>
+                </div>
             </div>
             {{-- End of row  --}}
 
         </section>
     </div>
 @endsection
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

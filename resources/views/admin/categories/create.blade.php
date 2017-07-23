@@ -8,13 +8,13 @@
 @section('body')
     <div class="page-heading">
         <div class="buttons">
-            <a href="{{ route('posts.index') }}" class="btn btn-lg btn-grey">
+            <a href="{{ route('categories.index') }}" class="btn btn-lg btn-grey">
                 <i class="flaticon-undo"></i> Cancel
             </a>
         </div>
 
         <div class="title">
-            New Post
+            New Category
         </div>
     </div>
 
@@ -22,7 +22,7 @@
         <div class="container-fluid">
             @include('errors.list')
 
-            <form class="form" action="{{ route('posts.index') }}" method="post">
+            <form class="form" action="{{ route('categories.index') }}" method="post">
                 {{ csrf_field() }}
 
                 {{-- Left side  --}}
@@ -31,9 +31,9 @@
                         <div class="block">
                             <div class="block-content">
                                 <div class="form-group">
-                                    <input type="text" name="title" value="{{ old('title') }}"
+                                    <input type="text" name="name" value="{{ old('name') }}"
                                     required
-                                    placeholder="Post title"
+                                    placeholder="Category Name"
                                     id="slug-source"
                                     class="form-control input-lg">
                                 </div>
@@ -41,35 +41,18 @@
                                 <div class="form-group">
                                     <input type="text" name="slug" value="{{ old('slug') }}"
                                     required
-                                    placeholder="Post slug"
+                                    placeholder="Category Slug"
                                     id="slug-target"
                                     class="form-control input-lg">
                                 </div>
 
                                 <div class="form-group mt-20">
-                                    <label>Category</label>
-                                    <select class="form-select grey" name="category_id">
+                                    <label>Parent Category</label>
+                                    <select class="form-select grey" name="parent_id">
                                         @foreach ($categories as $cat)
                                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-
-                                <div class="mt-40">
-                                    <label>Excerpt</label>
-                                    <textarea name="excerpt" class="form-control no-resize" rows="3"></textarea>
-                                </div>
-
-                                <div class="mt-20">
-                                    <label>Content</label>
-                                    <textarea name="content" class="tiny"></textarea>
-                                </div>
-
-                                <div class="form-group mt-20">
-                                    <label>Tags</label>
-                                    <input type="text" name="tags" value="{{ old('tags') }}"
-                                    placeholder="Tags"
-                                    class="form-control input-lg tags">
                                 </div>
                             </div>
                         </div>
@@ -80,34 +63,14 @@
                     <div class="col-sm-4">
                         <div class="block">
                             <div class="block-content">
-                                <div class="form-select grey">
-                                    <select class="" name="status">
-                                        <option value="unpublished">Unpublished</option>
-                                        <option value="published">Published</option>
-                                    </select>
-                                </div>
-
                                 <div class="mt-20">
                                     <button type="submit" name="submit" class="btn btn-lg btn-blue btn-block">
-                                        <i class="flaticon-check"></i> Save Post
+                                        <i class="flaticon-check"></i> Save Category
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-
-                        <div class="block mt-40">
-                            <div class="block-content">
-                                <h3>Image Preview</h3>
-
-                                <input type="hidden" class="form-control" id='profile' name='image' readonly value="{{ old('image') }}">
-                                <div id="profile_view" class="mt-20"></div>
-
-                                <div class="text-right">
-                                    <a href="/backend/filemanager/dialog.php?type=1&field_id=profile" class="iframe-btn btn-dark btn round"> <i class='flaticon-folder'></i> Files</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     {{-- End of col 3 --}}
 
