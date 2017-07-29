@@ -18,7 +18,7 @@
                     <div class="col-sm-4">
                         <div class="left-side">
                             <div class="category">
-                                <a href="">
+                                <a href="/blog/category/{{$first->category->id}}">
                                     <i class="flaticon-menu-mobile"></i> {{ $first->category->name }}
                                 </a>
                             </div>
@@ -72,7 +72,7 @@
                                             <div class="post-details">
                                                 <div class="inside">
                                                     <div class="category">
-                                                        <a href="">
+                                                        <a href="/blog/category/{{$post->category->id}}">
                                                             <i class="flaticon-menu-mobile"></i> {{ $post->category->name}}
                                                         </a>
                                                     </div>
