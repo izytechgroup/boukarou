@@ -15,29 +15,33 @@ class BlogController extends Controller
         ->where('category_id', $category_id)
         ->first();
 
-        $posts = Post::orderBy('id', 'desc')
-            ->with('category')
-            ->whereStatus('published')
-            ->where('category_id', $category_id)
-            ->where('id', '!=', $first->id)
-            ->take(10)
-            ->get();
+        $posts = [];
+        if ( $first)
+            $posts = Post::orderBy('id', 'desc')
+                ->with('category')
+                ->whereStatus('published')
+                ->where('id', '!=', $first->id)
+                ->take(10)
+                ->get();
+
 
         return view('front.blog.index', compact('posts', 'first'));
     }
-    
+
     public function index ()
     {
         $first = Post::orderBy('id', 'desc')
         ->where('status', 'published')
         ->first();
 
-        $posts = Post::orderBy('id', 'desc')
-            ->with('category')
-            ->whereStatus('published')
-            ->where('id', '!=', $first->id)
-            ->take(10)
-            ->get();
+        $posts = [];
+        if ( $first)
+            $posts = Post::orderBy('id', 'desc')
+                ->with('category')
+                ->whereStatus('published')
+                ->where('id', '!=', $first->id)
+                ->take(10)
+                ->get();
 
         return view('front.blog.index', compact('posts', 'first'));
     }
