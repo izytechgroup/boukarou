@@ -72,5 +72,81 @@ body.projets-template {
     }
 
 
-    
+    > .projet {
+        margin: 40px 0;
+
+        .content {
+            background-color: white;
+            padding: 20px;
+
+            h2 {
+                margin: 0;
+                margin-top:20px;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+
+            .theme {
+                color: $color-teal;
+            }
+
+            .paragraph {
+                margin-top: 20px;
+                font-size: 16px;
+                line-height: 26px;
+                color: #666;
+                font-weight: 400;
+                font-family: 'Source Sans Pro', 'Open Sans', Calibri, sans-serif;
+
+                h4 {
+                    font-variant: small-caps;
+                    font-weight: 500;
+                    color: $color-dark;
+                }
+            }
+
+            .image {
+                width: 150px;
+                float: left;
+                margin-right: 10px;
+                height: 150px;
+
+                img {
+                    width: auto;
+                    max-width: 150px;
+                }
+            }
+
+        }
+
+
+        .other-projects {
+            .item {
+                background-color: white;
+                padding: 20px;
+                color: $color-blue-paypal;
+                box-shadow: 0px 1px 3px rgba(0,0,0,0.11);
+
+                h2 {
+                    color: $color-dark;
+                    text-transform: uppercase;
+                }
+
+                .image {
+                    width: 150px;
+                    margin: 20px auto;
+
+                    img {
+                        max-width: 150px;
+                    }
+                }
+
+                .theme {
+                    color: $color-teal;
+                }
+
+            }
+        }
+
+    }
 }
