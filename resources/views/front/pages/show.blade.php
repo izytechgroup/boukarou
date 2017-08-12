@@ -30,17 +30,17 @@
     <div class="container">
         <div class="row">
             <div class="post">
-                <div class="post-title mt-20">
-                    <h1>{{ $page->title }}</h1>
-                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="post-title mt-20">
+                            <h1>{{ $page->title }}</h1>
+                        </div>
 
-                <div class="image mt-20">
-                    <img class="img-responsive" src="{{ $page->image }}" alt="">
-                </div>
+                        <div class="image mt-20">
+                            <img class="img-responsive" src="{{ $page->image }}" alt="">
+                        </div>
 
-                <div class="content mt-20">
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2">
+                        <div class="content mt-20">
                             {!! $page->content !!}
                         </div>
                     </div>
