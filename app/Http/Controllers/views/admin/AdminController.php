@@ -14,8 +14,10 @@ class AdminController extends Controller
         $users = DB::table('users')->count();
         $posts = DB::table('posts')->count();
         $comments = DB::table('comments')->count();
+        $pages = DB::table('pages')->count();
+        $events = DB::table('events')->count();
 
-        return view('admin.all.dashboard', compact('users', 'posts', 'comments'));
+        return view('admin.all.dashboard', compact('users', 'posts', 'comments', 'pages', 'events'));
     }
 
 

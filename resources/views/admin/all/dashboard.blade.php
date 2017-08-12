@@ -30,6 +30,22 @@
                     <h4>Comments</h4>
                 </div>
             </div>
+
+            <div class="col-sm-3">
+                <div class="card blue">
+                    <h2>{{ $pages }}</h2>
+                    <h4>Pages</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards row">
+            <div class="col-sm-3">
+                <div class="card green">
+                    <h2>{{ $events }}</h2>
+                    <h4>Events</h4>
+                </div>
+            </div>
         </div>
     </div>
 </div>
