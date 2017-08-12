@@ -39,7 +39,11 @@
                 </div>
 
                 <div class="content mt-20">
-                    {!! $page->content !!}
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            {!! $page->content !!}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
