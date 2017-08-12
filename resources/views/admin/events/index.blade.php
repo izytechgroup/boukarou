@@ -4,13 +4,13 @@
 @section('body')
     <div class="page-heading">
         <div class="buttons">
-            <a href="{{ route('categories.create') }}" class="btn btn-lg btn-green">
-                <i class="flaticon-cross"></i> New Category
+            <a href="{{ route('events.create') }}" class="btn btn-lg btn-green">
+                <i class="flaticon-cross"></i> New Event
             </a>
         </div>
 
         <div class="title">
-            Categories
+            Events
         </div>
     </div>
 
@@ -22,6 +22,16 @@
             <div class="mt-10">
                 <div class="row">
                     <form class="form" action="" method="get">
+                        <div class="col-sm-4">
+                            <div class="form-select grey">
+                                <select class="" name="status">
+                                    <option value="">All</option>
+                                    <option value="published" {{ Request::get('status') == 'published' ? 'selected' : '' }}>Published</option>
+                                    <option value="unpublished" {{ Request::get('status') == 'unpublished' ? 'selected' : '' }}>Unpublished</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="col-sm-8">
                             <div class="row">
                                 <div class="col-sm-8">
@@ -30,7 +40,7 @@
                                         name="keywords"
                                         class="form-control input-lg"
                                         value="{{ Request::get('keywords') }}"
-                                        placeholder="Category title">
+                                        placeholder="Event title">
                                     </div>
                                 </div>
 
@@ -51,18 +61,20 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Parent</th>
+                            <th>Title</th>
+                            <th>Status</th>
                             <th>Created</th>
+                            <th>Published</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($categories as $category)
-                            <tr data-href="{{ route('categories.edit', $category->id) }}">
-                                <td class="bold">{{ $category->name }}</td>
-                                <td>{{ $category->parent ? $category->parent->name : '-' }}</td>
-                                <td>{{ Helper::fullDate($category->created_at)}}</td>
+                        @foreach($events as $event)
+                            <tr data-href="{{ route('events.edit', $event->id) }}">
+                                <td class="bold">{{ $event->title }}</td>
+                                <td>{{ $event->status === 'published' ? 'Published' : 'Unpublished'}}</td>
+                                <td>{{ Helper::fullDate($event->created_at) }}</td>
+                                <td>{{ Helper::fullDate($event->published_at) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

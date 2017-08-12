@@ -2,7 +2,7 @@
 
 
 @section('head')
-    <title>{{ $post->title }}</title>
+    <title>{{ $event->title }}</title>
     <!-- for Google -->
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -38,28 +38,28 @@
                 <div class="col-md-9 col-sm-12">
                     <div class="post">
                         <div class="category">
-                            <a href="/blog/categories/{{ $post->category->id}}">
-                                <i class="flaticon-menu-mobile"></i> {{ $post->category->name }}
+                            <a href="#">
+                                <i class="flaticon-menu-mobile"></i> {{ $event->category->name }}
                             </a>
                         </div>
 
                         <div class="post-title">
-                            {{ $post->title }}
+                            {{ $event->title }}
                         </div>
 
                         <div class="post-metas">
                             <ul class="list-unstyled">
-                                <li>{{ Helper::fullDate($post->created_at) }}</li>
+                                <li>{{ Helper::fullDate($event->created_at) }}</li>
                             </ul>
                         </div>
 
                         <div class="image">
-                            <img class="img-responsive" src="{{ $post->image }}" alt="">
+                            <img class="img-responsive" src="{{ $event->image }}" alt="">
                         </div>
                         <div class="sharethis-inline-share-buttons"></div>
 
                         <div class="content">
-                            {!! $post->content !!}
+                            {!! $event->content !!}
                         </div>
 
                     </div>
@@ -69,7 +69,7 @@
 
                 <div class="col-md-3 col-sm-12">
                     <div class="row">
-                        @foreach ($posts as $p)
+                        @foreach ($events as $p)
                             <div class="col-md-12 col-sm-6">
                                 <div class="other-post">
                                     <div class="image">
@@ -78,7 +78,7 @@
                                         </a>
                                     </div>
                                     <h4>
-                                        <a href="/blog/{{ $p->slug }}">{{ $p->title }}</a>
+                                        <a href="/events/{{ $p->slug }}">{{ $p->title }}</a>
                                     </h4>
                                 </div>
                             </div>

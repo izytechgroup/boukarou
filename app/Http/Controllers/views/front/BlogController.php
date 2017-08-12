@@ -21,8 +21,7 @@ class BlogController extends Controller
                 ->with('category')
                 ->whereStatus('published')
                 ->where('id', '!=', $first->id)
-                ->take(10)
-                ->get();
+                ->paginate(10);
 
 
         return view('front.blog.index', compact('posts', 'first'));

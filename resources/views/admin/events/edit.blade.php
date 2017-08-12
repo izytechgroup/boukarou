@@ -11,13 +11,13 @@
             <a href="{{ route('posts.index') }}" class="btn btn-lg btn-grey">
                 <i class="flaticon-undo"></i> Cancel
             </a>
-            <a href="/{{ $project->slug }}" class="btn btn-lg btn-green">
-                <i class="flaticon-view"></i> View Project
+            <a href="/{{ $event->slug }}" class="btn btn-lg btn-green">
+                <i class="flaticon-view"></i> View Event
             </a>
         </div>
 
         <div class="title">
-            Edit Project
+            Edit Event
         </div>
     </div>
 
@@ -25,66 +25,50 @@
         <div class="container-fluid">
             @include('errors.list')
 
-            {!! Form::model($project, ['method' => 'PATCH', 'route' => ['projects.update', $project->id], 'class' => 'form' ]) !!}
+            {!! Form::model($event, ['method' => 'PATCH', 'route' => ['events.update', $event->id], 'class' => 'form' ]) !!}
             {{-- Left side  --}}
-            {{ csrf_field() }}
             <div class="row">
                 <div class="col-sm-8">
                     <div class="block">
                         <div class="block-content">
                             <div class="form-group">
-                                <label>project Title</label>
-                                <input type="text" name="title" value="{{ $project->title }}"
-                                required
-                                placeholder="Project title"
-                                id="slug-source"
-                                class="form-control input-lg">
+                                {!! Form::text('title', null, [
+                                    'class' => 'form-control input-lg',
+                                    'required' => 'required',
+                                    'placeholder' => 'Event title']) !!}
                             </div>
 
                             <div class="form-group">
-                                <label>Project Slug</label>
-                                <input type="text" name="slug" value="{{ $project->slug }}"
-                                required
-                                placeholder="Project slug"
-                                id="slug-target"
-                                class="form-control input-lg">
+                                {!! Form::text('slug', null, [
+                                    'class' => 'form-control input-lg',
+                                    'required' => 'required',
+                                    'disabled' => 'disabled']) !!}
                             </div>
 
                             <div class="form-group mt-20">
-                                <label>Themes</label>
-                                <input type="text" name="tags" value="{{ $project->tags }}"
-                                    placeholder="Tags separated by a comma"
-                                    class="form-control input-lg tags">
+                                <label>Category</label>
+                                <select class="form-select grey" name="category_id">
+                                    @foreach ($categories as $cat)
+                                        <option value="{{ $cat->id }}" {{ $cat->id == $event->category_id ? "selected" : ""}}>{{ $cat->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
-
-                            <div class="mt-20">
-                                <label>Description</label>
-                                <textarea name="description" class="tiny">{{ $project->description }}</textarea>
-                            </div>
-
-                            <div class="mt-20">
-                                <label>Idea Development</label>
-                                <textarea name="idea" class="tiny">{{ $project->idea}}</textarea>
+                            <div class="mt-40">
+                                {!! Form::label('Excerpt') !!}
+                                {!! Form::textarea('excerpt', null, ['class' => 'form-control no-resize', 'rows' => '3']) !!}
                             </div>
 
                             <div class="mt-20">
-                                <label>Project Development</label>
-                                <textarea name="project_dev" class="tiny">{{ $project->project_dev }}</textarea>
+                                {!! Form::label('Content') !!}
+                                {!! Form::textarea('content', null, ['class' => 'tiny']) !!}
                             </div>
 
                             <div class="form-group mt-20">
-                                <label>Project Owner</label>
-                                <input type="text" name="owner" value="{{ $project->owner }}"
-                                    placeholder="project owner"
-                                    class="form-control input-lg">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Contact</label>
-                                <input type="text" name="contact" value="{{ $project->contact }}"
-                                    placeholder="Contact"
-                                    class="form-control input-lg">
+                                {!! Form::label('Tags') !!}
+                                {!! Form::text('tags', null, [
+                                    'class' => 'form-control input-lg tags',
+                                    'placeholder' => 'Tags']) !!}
                             </div>
                         </div>
                     </div>
@@ -95,18 +79,23 @@
                 <div class="col-sm-4">
                     <div class="block">
                         <div class="block-content">
-                            <label>Progression State</label>
                             <div class="form-select grey">
-                                <select class="" name="status">
-                                    <option value="En cours" {{ $project->status == "En cours" ? 'selected' : ''}}>In process</option>
-                                    <option value="Terminé" {{ $project->status == "Terminé" ? 'selected' : ''}}>Ended</option>
-                                    <option value="Annulé" {{ $project->status == "Annulé" ? 'selected' : ''}}>Cancelled</option>
+                                {!! Form::select('status',
+                                    ['unpublished' => 'Unpublished', 'published' => 'Published'],
+                                    $event->status) !!}
+                            </div>
+
+                            <div class="form-select grey">
+                                <select class="" name="template">
+                                    @foreach (config('templates.posts') as $key => $value)
+                                        <option value="{{ $key }}" {{ $event->template == $key ? 'seletected' : '' }}>{{ $key }} template</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="mt-20">
                                 <button type="submit" name="submit" class="btn btn-lg btn-blue btn-block">
-                                    <i class="flaticon-check"></i> Save
+                                    <i class="flaticon-check"></i> Update Event
                                 </button>
                             </div>
                         </div>
@@ -115,9 +104,9 @@
 
                     <div class="block mt-40">
                         <div class="block-content">
-                            <h3>Logo</h3>
+                            <h3>Flyer</h3>
 
-                            <input type="hidden" class="form-control" id='profile' name='image' readonly value="{{ $project->image }}">
+                            <input type="hidden" class="form-control" id='profile' name='image' readonly value="{{ $event->image }}">
                             <div id="profile_view" class="mt-20"></div>
 
                             <div class="text-right">

@@ -11,7 +11,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/projets">Projets</a></li>
+                <li><a href="/page/qui-sommes-nous">Qui sommes Nous ?</a></li>
+                <li><a href="/projets">Boukarians</a></li>
+                <li><a href="/page/offres">Offres</a></li>
+                <li><a href="/events">Activités</a></li>
                 <li><a href="/blog">Blog</a></li>
             </ul>
         </div>

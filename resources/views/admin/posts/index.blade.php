@@ -73,7 +73,8 @@
                             <tr data-href="{{ route('posts.edit', $post->id) }}">
                                 <td class="bold">{{ $post->title }}</td>
                                 <td>{{ $post->status === 'published' ? 'Published' : 'Unpublished'}}</td>
-                                <td>{{ date('d/m/Y H:i', strtotime($post->created_at)) }}</td>
+                                <td>{{ Helper::fullDate($post->created_at) }}</td>
+                                <td>{{ Helper::fullDate($post->published_at) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

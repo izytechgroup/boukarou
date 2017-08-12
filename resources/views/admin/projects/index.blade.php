@@ -68,10 +68,10 @@
                     </thead>
 
                     <tbody>
-                        @foreach($projects as $post)
-                            <tr data-href="{{ route('projects.edit', $post->id) }}">
-                                <td class="bold">{{ $post->title }}</td>
-                                <td>{{ $post->status }}</td>
+                        @foreach($projects as $project)
+                            <tr data-href="{{ route('projects.edit', $project->id) }}">
+                                <td class="bold">{{ $project->title }}</td>
+                                <td>{{ $project->status }}</td>
                             </tr>
                         @endforeach
                     </tbody>

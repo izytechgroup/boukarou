@@ -8,13 +8,13 @@
 @section('body')
     <div class="page-heading">
         <div class="buttons">
-            <a href="{{ route('projects.index') }}" class="btn btn-lg btn-grey">
+            <a href="{{ route('posts.index') }}" class="btn btn-lg btn-grey">
                 <i class="flaticon-undo"></i> Cancel
             </a>
         </div>
 
         <div class="title">
-            New Project
+            New Event
         </div>
     </div>
 
@@ -22,7 +22,7 @@
         <div class="container-fluid">
             @include('errors.list')
 
-            <form class="form" action="{{ route('projects.index') }}" method="post">
+            <form class="form" action="{{ route('events.index') }}" method="post">
                 {{ csrf_field() }}
 
                 {{-- Left side  --}}
@@ -31,58 +31,45 @@
                         <div class="block">
                             <div class="block-content">
                                 <div class="form-group">
-                                    <label>project Title</label>
                                     <input type="text" name="title" value="{{ old('title') }}"
                                     required
-                                    placeholder="Project title"
+                                    placeholder="Event title"
                                     id="slug-source"
                                     class="form-control input-lg">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Project Slug</label>
                                     <input type="text" name="slug" value="{{ old('slug') }}"
                                     required
-                                    placeholder="Project slug"
+                                    placeholder="Event slug"
                                     id="slug-target"
                                     class="form-control input-lg">
                                 </div>
 
                                 <div class="form-group mt-20">
-                                    <label>Themes</label>
-                                    <input type="text" name="tags" value="{{ old('tags') }}"
-                                        placeholder="Tags separated by a comma"
-                                        class="form-control input-lg tags">
+                                    <label>Category</label>
+                                    <select class="form-select grey" name="category_id">
+                                        @foreach ($categories as $cat)
+                                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-
-                                <div class="mt-20">
-                                    <label>Description</label>
-                                    <textarea name="description" class="tiny"></textarea>
-                                </div>
-
-                                <div class="mt-20">
-                                    <label>Idea Development</label>
-                                    <textarea name="idea" class="tiny"></textarea>
+                                <div class="mt-40">
+                                    <label>Excerpt</label>
+                                    <textarea name="excerpt" class="form-control no-resize" rows="3"></textarea>
                                 </div>
 
                                 <div class="mt-20">
-                                    <label>Project Development</label>
-                                    <textarea name="project_dev" class="tiny"></textarea>
+                                    <label>Content</label>
+                                    <textarea name="content" class="tiny"></textarea>
                                 </div>
 
                                 <div class="form-group mt-20">
-                                    <label>Project Owner</label>
-                                    <input type="text" name="owner" value="{{ old('porteur') }}"
-                                        placeholder="project owner"
-                                        class="form-control input-lg">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Contact</label>
-                                    <input type="text" name="contact" value="{{ old('contact') }}"
-                                        placeholder="Contact"
-                                        class="form-control input-lg">
+                                    <label>Tags</label>
+                                    <input type="text" name="tags" value="{{ old('tags') }}"
+                                    placeholder="Tags"
+                                    class="form-control input-lg tags">
                                 </div>
                             </div>
                         </div>
@@ -93,18 +80,16 @@
                     <div class="col-sm-4">
                         <div class="block">
                             <div class="block-content">
-                                <label>Progression State</label>
                                 <div class="form-select grey">
                                     <select class="" name="status">
-                                        <option value="En cours">In process</option>
-                                        <option value="Terminé">Ended</option>
-                                        <option value="Annulé">Cancelled</option>
+                                        <option value="unpublished">Unpublished</option>
+                                        <option value="published">Published</option>
                                     </select>
                                 </div>
 
                                 <div class="mt-20">
                                     <button type="submit" name="submit" class="btn btn-lg btn-blue btn-block">
-                                        <i class="flaticon-check"></i> Save
+                                        <i class="flaticon-check"></i> Save Event
                                     </button>
                                 </div>
                             </div>
@@ -113,7 +98,7 @@
 
                         <div class="block mt-40">
                             <div class="block-content">
-                                <h3>Logo</h3>
+                                <h3>Flyer</h3>
 
                                 <input type="hidden" class="form-control" id='profile' name='image' readonly value="{{ old('image') }}">
                                 <div id="profile_view" class="mt-20"></div>
@@ -162,7 +147,7 @@ tinymce.init({
     selector: ".tiny",
     theme: "modern",
     relative_urls: false,
-    height : 200,
+    height : 280,
     fontsize_formats: "8px 10px 12px 14px 16px 18px 24px 32px 36px 60px",
     plugins: [
          "advlist autolink link image lists charmap print preview hr anchor pagebreak",

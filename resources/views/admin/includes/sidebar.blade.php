@@ -34,6 +34,13 @@
             </a>
         </li>
 
+        <li class="{{ Request::is('admin/events*') ? 'active' : '' }}">
+            <a href="{{ route('events.index') }}">
+                <i class="flaticon-posts"></i>
+                Events
+            </a>
+        </li>
+
         <li class="{{ Request::is('admin/comments*') ? 'active' : '' }}">
             <a href="/admin/categories">
                 <i class="flaticon-chat"></i>

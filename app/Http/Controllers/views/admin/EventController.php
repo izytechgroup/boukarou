@@ -4,14 +4,14 @@ namespace App\Http\Controllers\views\admin;
 
 use DB;
 use Auth;
-use App\Models\Post;
+use App\Models\Event;
 use App\Models\Category;
 use App\Traits\SlugTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class PostController extends Controller
+class EventController extends Controller
 {
     use SlugTrait;
 
@@ -24,9 +24,6 @@ class PostController extends Controller
     {
         try
         {
-            if ( Auth::user()->cant('create', Post::class)) return redirect()->back();
-
-
             $status = null;
             if ( $request->has('status') && $request->status != '' ) {
                 if ( in_array($request->status, ['published', 'unpublished']) ) {
@@ -37,7 +34,7 @@ class PostController extends Controller
             $keywords = $request->keywords;
 
 
-            $posts = Post::when($keywords, function($query) use ($keywords) {
+            $events = Event::when($keywords, function($query) use ($keywords) {
                 return $query->where('title', 'like', $keywords);
             })
             ->when($status, function($query) use ($status) {
@@ -47,7 +44,7 @@ class PostController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(50);
 
-            return view('admin.posts.index', ['posts' => $posts,]);
+            return view('admin.events.index', ['events' => $events,]);
         }
         catch (Exception $e) {
             return redirect()->back()->withErrors($e);
@@ -57,23 +54,20 @@ class PostController extends Controller
 
 
     /**
-     * Create new page
+     * Create new event
      *
      * @return view()
      */
     public function create()
     {
-        if ( Auth::user()->cant('create', Post::class))
-            return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
-
         $categories = Category::get();
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.events.create', compact('categories'));
     }
 
 
     /**
-     * Store a new page
+     * Store a new Event
      *
      * @param  Request $request
      *
@@ -81,8 +75,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        if ( Auth::user()->cant('create', Post::class))
-            return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
 
         $validator = Validator::make($request->all(), [
             'title'         => 'required',
@@ -94,15 +86,15 @@ class PostController extends Controller
             return redirect()->back()->withErrors(['validator' => 'Title & slug are required']);
 
         //Check if the slug exists using slug trait
-        $slug = $this->getUniqueSlug($request->slug, 'posts');
+        $slug = $this->getUniqueSlug($request->slug, 'events');
 
-        $post = Post::create([
+        $event = Event::create([
             'title'             => $request->title,
             'slug'              => $slug,
             'tags'              => $request->has('tags') ? $request->tags : null,
             'image'             => $request->has('image') ? $request->image : "",
             'template'          => $request->has('template') ? $request->template : 'default',
-            'excerpt'           => $request->has('excerpt') ? $request->excerpt : substr($request->content, 0, 50),
+            'excerpt'           => $request->has('excerpt') ? $request->excerpt : substr($request->content, 0, 70),
             'content'           => $request->has('content') ? $request->content : "",
             'status'            => $request->status,
             'category_id'       => $request->category_id,
@@ -110,7 +102,7 @@ class PostController extends Controller
             'last_updated_by'   => Auth::user()->id
         ]);
 
-        return redirect()->route('posts.edit', ['id' => $post->id]);
+        return redirect()->route('events.edit', ['id' => $event->id]);
     }
 
 
@@ -125,22 +117,20 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        if ( Auth::user()->cant('create', Post::class))
-            return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
 
-        $post = Post::find($id);
-        if ( !$post )
-            return redirect()->route('posts.index');
+        $event = Event::find($id);
+        if ( !$event )
+            return redirect()->route('events.index');
 
         $categories = Category::get();
 
-        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
+        return view('admin.events.edit', ['event' => $event, 'categories' => $categories]);
     }
 
 
 
     /**
-     * Update a page
+     * Update a Event
      * @param  Request $request [description]
      * @param  [type]  $id      [description]
      * @return [type]           [description]
@@ -149,8 +139,6 @@ class PostController extends Controller
     {
         try
         {
-            if ( Auth::user()->cant('create', Post::class))
-            return redirect()->back()->withErrors(['authorization' => 'You are not authorized']);
 
             $validator = Validator::make($request->all(), [
                 'title' => 'required'
@@ -160,27 +148,26 @@ class PostController extends Controller
                 return redirect()->back()->withErrors(['validator' => 'Title is required']);
 
 
-            $post = Post::find($id);
-            if ( !$post )
-                return redirect()->back()->withErrors(['error' => 'This post does not exist']);
+            $event = Event::find($id);
+            if ( !$event )
+                return redirect()->back()->withErrors(['error' => 'This event does not exist']);
 
-            $post->tags             = $request->tags;
-            $post->title            = $request->title;
-            $post->image            = $request->image;
-            $post->status           = $request->status;
-            $post->template         = $request->template;
-            $post->excerpt          = $request->excerpt;
-            $post->content          = $request->content;
-            $post->category_id      = $request->category_id;
-            $post->last_updated_by  = Auth::user()->id;
-            $post->save();
+            $event->tags             = $request->tags;
+            $event->title            = $request->title;
+            $event->image            = $request->image;
+            $event->status           = $request->status;
+            $event->template         = $request->template;
+            $event->excerpt          = $request->excerpt;
+            $event->content          = $request->content;
+            $event->category_id      = $request->category_id;
+            $event->last_updated_by  = Auth::user()->id;
+            $event->save();
 
-            return redirect()->back()->with('message', 'Post successfully update!');
+            return redirect()->back()->with('message', 'Event successfully update!');
         }
         catch (Exception $e) {
             return redirect()->back()->withErrors($e);
         }
 
     }
-
 }
