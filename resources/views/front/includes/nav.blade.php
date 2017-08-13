@@ -12,9 +12,30 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/page/qui-sommes-nous">Qui sommes Nous ?</a></li>
-                <li><a href="/projets">Boukarians</a></li>
-                <li><a href="/page/offres">Offres</a></li>
+
+                <li class="dropdown">
+                    <a href="/projets" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Boukarians <i class="flaticon-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Projets Accompagnés</a></li>
+                        <li><a href="">Etudiants</a></li>
+                        <li><a href="">Partenaires</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="/page/offres" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Offres <i class="flaticon-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Jeunes Pousses</a></li>
+                        <li><a href="">Corporate</a></li>
+                        <li><a href="">Grand Public</a></li>
+                    </ul>
+                </li>
                 <li><a href="/events">Activités</a></li>
+                <li><a href="/blog">Boukarou Life Units</a></li>
                 <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
