@@ -299,6 +299,6 @@
 
 
     @include('front.includes.footer')
-
+    <script src="/assets/js/scripts.min.js"></script>
 
 </html>
